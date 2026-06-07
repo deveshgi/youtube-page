@@ -54,79 +54,66 @@ const categories = [
 
 function Home() {
   return (
-    <div className="flex bg-[#0f0f0f] text-white min-h-screen">
-      {/* Sidebar */}
-      <aside className="w-20 md:w-56 p-4 border-r border-gray-800">
-        <ul className="space-y-6">
-          <li className="hover:bg-gray-800 p-2 rounded-lg cursor-pointer">
-            🏠 Home
-          </li>
-          <li className="hover:bg-gray-800 p-2 rounded-lg cursor-pointer">
-            🎬 Shorts
-          </li>
-          <li className="hover:bg-gray-800 p-2 rounded-lg cursor-pointer">
-            📺 Subscriptions
-          </li>
-          <li className="hover:bg-gray-800 p-2 rounded-lg cursor-pointer">
-            📚 Library
-          </li>
-        </ul>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-5">
-        {/* Categories */}
-        <div className="flex gap-3 overflow-x-auto mb-8 scrollbar-hide">
+    <div className="min-h-screen bg-[#0f0f0f] text-white">
+      {/* Categories */}
+      <div className="sticky top-0 z-10 bg-[#0f0f0f] py-3">
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
           {categories.map((category, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded-lg whitespace-nowrap ${
+              className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-medium transition ${
                 index === 0
                   ? "bg-white text-black"
-                  : "bg-gray-800 hover:bg-gray-700"
+                  : "bg-[#272727] hover:bg-[#3d3d3d]"
               }`}
             >
               {category}
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Videos Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {videos.map((video) => (
-            <div
-              key={video.id}
-              className="cursor-pointer hover:scale-[1.02] transition duration-300"
-            >
+      {/* Video Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 mt-6">
+        {videos.map((video) => (
+          <div
+            key={video.id}
+            className="cursor-pointer group"
+          >
+            {/* Thumbnail */}
+            <div className="overflow-hidden rounded-xl">
               <img
                 src={video.thumbnail}
                 alt={video.title}
-                className="rounded-xl w-full h-52 object-cover"
+                className="w-full h-52 object-cover rounded-xl group-hover:scale-105 transition duration-300"
               />
+            </div>
 
-              <div className="flex mt-3 gap-3">
-                <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center font-bold">
-                  {video.channel[0]}
-                </div>
+            {/* Video Info */}
+            <div className="flex gap-3 mt-3">
+              {/* Avatar */}
+              <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center font-bold shrink-0">
+                {video.channel[0]}
+              </div>
 
-                <div>
-                  <h3 className="font-semibold text-sm line-clamp-2">
-                    {video.title}
-                  </h3>
+              {/* Details */}
+              <div>
+                <h3 className="font-semibold text-sm line-clamp-2">
+                  {video.title}
+                </h3>
 
-                  <p className="text-gray-400 text-sm mt-1">
-                    {video.channel}
-                  </p>
+                <p className="text-gray-400 text-sm mt-1 hover:text-white cursor-pointer">
+                  {video.channel}
+                </p>
 
-                  <p className="text-gray-400 text-xs">
-                    {video.views} • {video.time}
-                  </p>
-                </div>
+                <p className="text-gray-400 text-xs">
+                  {video.views} • {video.time}
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      </main>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

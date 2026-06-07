@@ -1,32 +1,11 @@
-const RecentVideosTable = ({
-  videos
-}) => {
+import { Outlet } from "react-router-dom";
+
+function AuthLayout() {
   return (
-    <table className="w-full">
-
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Views</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        {videos.map(video => (
-          <tr
-            key={video._id}
-          >
-            <td>{video.title}</td>
-
-            <td>{video.views}</td>
-          </tr>
-        ))}
-
-      </tbody>
-
-    </table>
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+      <Outlet />
+    </div>
   );
-};
+}
 
-export default RecentVideosTable;
+export default AuthLayout;
